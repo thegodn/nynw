@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neyex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+        .image-section {
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #main-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.5s ease;
+        }
+        .text-section {
+            width: 50%;
+            height: 100%;
+            background-color: #2F4F4F; /* antrasit renk */
+            color: white;
+            padding: 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+        }
+        li {
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: rgba(255,255,255,0.7);
+            font-family: 'Kalam', cursive;
+            font-size: 24px;
+            position: relative;
+            padding-left: 15px;
+        }
+        li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        li:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        li:hover::before {
+            opacity: 1;
+        }
+        p {
+            margin-bottom: 40px;
+            line-height: 1.6;
+            font-size: 18px;
+            font-weight: 300;
+        }
+        .kesfet {
+            background-color: #f2ede9;
+            border: none;
+            color: #2F4F4F;
+            padding: 15px 35px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            align-self: flex-start;
+        }
+        .kesfet:hover {
+            background-color: #e5dcd3;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section">
+            <div id="main-image"></div>
+        </div>
+        <div class="text-section">
+            <ul>
+                <li data-image="url('https://i.ibb.co/3kJfqmg/neyex.webp')">
+                    <a href="https://neyex.co/oversize-unisex-tshirt" target="_blank">Oversize T-shirt</a>
+                </li>
+                <li data-image="url('https://i.ibb.co/9312rzr/image-900.webp')">
+                    <a href="https://neyex.co/cocuk" target="_blank">Çocuk Giyim</a>
+                </li>
+                <li data-image="url('https://i.ibb.co/X2cNFQq/image-900-1.webp')">
+                    <a href="https://neyex.co/nevresim" target="_blank">Nevresim Takımları</a>
+                </li>
+                <li data-image="url('https://i.ibb.co/WPTJvk5/image-900-2.webp')">
+                    <a href="https://neyex.co/bornoz" target="_blank">Bornoz Takımları</a>
+                </li>
+                <li data-image="url('https://i.ibb.co/4W1JPpX/image-1512.webp')">
+                    <a href="https://neyex.co/haftanin-firsatlari" target="_blank">#HAFTANINFIRSATLARI</a>
+                </li>
+            </ul>
+            <p>Neyex ile tarzınızı ve yaşam alanınızı yeniden keşfedin. Rahat tişörtlerimiz ve şık ev tekstili ürünlerimizle kendinizi ve evinizi ifade edin. Kaliteli kumaşlar, özgün tasarımlar ve geniş renk seçenekleriyle her zevke hitap eden koleksiyonumuz, günlük konforunuzu ve evinizin sıcaklığını artırmak için burada. Neyex'le tarzınızı giyinin, evinizi giydirin!</p>
+            <a href="https://neyex.co/tum-urunler" target="_blank"><button class="kesfet">Keşfet</button></a>
+        </div>
+    </div>
+
+    <script>
+        const mainImage = document.getElementById('main-image');
+        const items = document.querySelectorAll('.text-section li');
+
+        items.forEach(item => {
+            item.addEventListener('mouseover', () => {
+                mainImage.style.backgroundImage = item.dataset.image;
+            });
+        });
+
+        // Set initial image
+        mainImage.style.backgroundImage = items[0].dataset.image;
+    </script>
+</body>
+</html>
