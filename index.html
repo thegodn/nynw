@@ -22,25 +22,18 @@
             width: 50%;
             height: 100%;
             overflow: hidden;
-            position: relative;
         }
-        #main-image, #overlay-image {
+        #main-image {
             width: 100%;
             height: 100%;
             background-size: cover;
             background-position: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1);
-        }
-        #overlay-image {
-            opacity: 0;
+            transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
         .text-section {
             width: 50%;
             height: 100%;
-            background-color: #2F4F4F;
+            background-color: #383e42;
             color: white;
             padding: 40px;
             box-sizing: border-box;
@@ -86,7 +79,7 @@
         .kesfet {
             background-color: #f2ede9;
             border: none;
-            color: #2F4F4F;
+            color: #383e42;
             padding: 15px 35px;
             cursor: pointer;
             font-size: 16px;
@@ -113,7 +106,7 @@
             transition: all 0.6s;
         }
         .kesfet:hover {
-            background-color: #383e42;
+            background-color: #e5dcd3;
             transform: translateY(-3px) rotateX(15deg);
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
@@ -130,7 +123,6 @@
     <div class="container">
         <div class="image-section">
             <div id="main-image"></div>
-            <div id="overlay-image"></div>
         </div>
         <div class="text-section">
             <ul>
@@ -157,30 +149,16 @@
 
     <script>
         const mainImage = document.getElementById('main-image');
-        const overlayImage = document.getElementById('overlay-image');
         const items = document.querySelectorAll('.text-section li');
 
-        let currentIndex = 0;
-
-        function setImage(index) {
-            const newImage = items[index].dataset.image;
-            if (index !== currentIndex) {
-                overlayImage.style.backgroundImage = newImage;
-                overlayImage.style.opacity = '1';
-                setTimeout(() => {
-                    mainImage.style.backgroundImage = newImage;
-                    overlayImage.style.opacity = '0';
-                }, 500);
-                currentIndex = index;
-            }
-        }
-
-        items.forEach((item, index) => {
-            item.addEventListener('mouseover', () => setImage(index));
+        items.forEach(item => {
+            item.addEventListener('mouseover', () => {
+                mainImage.style.backgroundImage = item.dataset.image;
+            });
         });
 
         // Set initial image
-        setImage(0);
+        mainImage.style.backgroundImage = items[0].dataset.image;
     </script>
 </body>
 </html>
