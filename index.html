@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neyex</title>
+    <title>Neyex Interactive Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body, html {
@@ -24,26 +24,18 @@
             overflow: hidden;
             position: relative;
         }
-        #main-image {
+        #main-image, #overlay-image {
             width: 100%;
             height: 100%;
             background-size: cover;
             background-position: center;
-            transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
             position: absolute;
             top: 0;
             left: 0;
+            transition: opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
         #overlay-image {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            position: absolute;
-            top: 0;
-            left: 0;
             opacity: 0;
-            transition: opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
         .text-section {
             width: 50%;
@@ -168,19 +160,27 @@
         const overlayImage = document.getElementById('overlay-image');
         const items = document.querySelectorAll('.text-section li');
 
-        items.forEach(item => {
-            item.addEventListener('mouseover', () => {
-                overlayImage.style.backgroundImage = item.dataset.image;
-                overlayImage.style.opacity = '1';
-            });
+        let currentIndex = 0;
 
-            item.addEventListener('mouseout', () => {
-                overlayImage.style.opacity = '0';
-            });
+        function setImage(index) {
+            const newImage = items[index].dataset.image;
+            if (index !== currentIndex) {
+                overlayImage.style.backgroundImage = newImage;
+                overlayImage.style.opacity = '1';
+                setTimeout(() => {
+                    mainImage.style.backgroundImage = newImage;
+                    overlayImage.style.opacity = '0';
+                }, 500);
+                currentIndex = index;
+            }
+        }
+
+        items.forEach((item, index) => {
+            item.addEventListener('mouseover', () => setImage(index));
         });
 
         // Set initial image
-        mainImage.style.backgroundImage = items[0].dataset.image;
+        setImage(0);
     </script>
 </body>
 </html>
